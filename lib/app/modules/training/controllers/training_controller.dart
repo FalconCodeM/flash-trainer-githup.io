@@ -58,9 +58,6 @@ class TrainingController extends GetxController {
       podsFirstTime.add(i);
       allPodsSelected.add(i);
     }
-    AppErrorMsg.toastInfo(msg: 'First Time: ${podsFirstTime.toString()}');
-    AppErrorMsg.toastInfo(msg: 'Second Time: ${podsSecondTime.toString()}');
-    AppErrorMsg.toastInfo(msg: 'All Selected: ${allPodsSelected.toString()}');
   }
 
   Color podIsActive(int i) {
@@ -146,10 +143,6 @@ class TrainingController extends GetxController {
     await bluetoothServices.listenToCharacteristics();
     await Future.delayed(const Duration(milliseconds: 500));
     Get.to(const FinishingTraining());
-    Get.snackbar("pods", bluetoothServices.podsActiveNumbers.toString());
-    Get.snackbar("wrong", bluetoothServices.wrongTouchNumbers.toString());
-    Get.snackbar("right", bluetoothServices.rightTouchNumbers.toString());
-    Get.snackbar("average", bluetoothServices.averageTimeNumbers.toString());
   }
 
   void saveTrainingData() {
