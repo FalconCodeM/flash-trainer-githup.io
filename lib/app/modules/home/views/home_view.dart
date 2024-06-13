@@ -59,7 +59,7 @@ class HomeView extends GetView<HomeController> {
               hintText: AppStrings.search,
               withImage: true,
               imageName: AppImages.search,
-              onChanged: (value) {},
+              onChanged: controller.searching,
             ),
             const ReusableText(
               text: AppStrings.homeSupTitle,

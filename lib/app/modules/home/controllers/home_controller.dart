@@ -1,15 +1,24 @@
+import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
+import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
+import 'package:flash_trainer_app_bloc/app/data/repository/database_repository.dart';
 import 'package:flash_trainer_app_bloc/app/data/services/bluetooth_services.dart';
+import 'package:flash_trainer_app_bloc/app/modules/histroy/views/screens/history_user.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final FlashTrainerBluetoothServices bluetoothServices = Get.find();
+  DatabaseRepository repository;
+
+  HomeController({required this.repository});
+
+  final users = <Users>[].obs;
 
   final deviceName = ''.obs;
 
-
   @override
   void onInit() {
+    users.assignAll(repository.readUsers());
     super.onInit();
   }
 
@@ -22,7 +31,6 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
 
   RxString getDeviceName(BluetoothDevice device) {
     if (device.advName.isNotEmpty) {
@@ -39,5 +47,15 @@ class HomeController extends GetxController {
     return deviceName;
   }
 
-
+  searching(String userName) {
+    if (userName.trim().isEmpty) {
+      AppErrorMsg.toastError(msg: "you have to enter name to make searching");
+      return;
+    }
+    var existingUserIndex = users.indexWhere(
+        (user) => user.userName.toLowerCase() == userName.trim().toLowerCase());
+    if (existingUserIndex != -1) {
+      Get.to(HistoryUser(users: users[existingUserIndex]));
+    }
+  }
 }
