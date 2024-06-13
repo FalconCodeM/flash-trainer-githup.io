@@ -6,7 +6,6 @@ import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_button.dart';
 import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_main_app.dart';
 import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_text.dart';
 import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_text_field.dart';
-import 'package:flash_trainer_app_bloc/app/modules/training/views/screens/start_training.dart';
 import 'package:flash_trainer_app_bloc/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
