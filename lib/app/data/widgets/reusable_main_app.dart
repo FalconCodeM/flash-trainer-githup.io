@@ -1,7 +1,8 @@
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/shadows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../values/colors.dart';
+import '../values/shadows.dart';
 
 class ReusableMain extends StatelessWidget {
   final List<Widget> children;

@@ -1,16 +1,17 @@
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/shadows.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/strings.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_app_bar.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_background.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_main_app.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_row_two_text.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_text.dart';
-import 'package:flash_trainer_app_bloc/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../../data/models/users.dart';
+import '../../../../data/values/colors.dart';
+import '../../../../data/values/shadows.dart';
+import '../../../../data/values/strings.dart';
+import '../../../../data/widgets/reusable_app_bar.dart';
+import '../../../../data/widgets/reusable_background.dart';
+import '../../../../data/widgets/reusable_main_app.dart';
+import '../../../../data/widgets/reusable_row_two_text.dart';
+import '../../../../data/widgets/reusable_text.dart';
+import '../../../../routes/app_pages.dart';
 
 class HistoryTraining extends StatelessWidget {
   final TrainingModel trainingResult;

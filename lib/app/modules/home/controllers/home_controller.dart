@@ -1,10 +1,11 @@
-import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/repository/database_repository.dart';
-import 'package:flash_trainer_app_bloc/app/data/services/bluetooth_services.dart';
-import 'package:flash_trainer_app_bloc/app/modules/histroy/views/screens/history_user.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
+
+import '../../../data/errors/errors.dart';
+import '../../../data/models/users.dart';
+import '../../../data/repository/database_repository.dart';
+import '../../../data/services/bluetooth_services.dart';
+import '../../histroy/views/screens/history_user.dart';
 
 class HomeController extends GetxController {
   final FlashTrainerBluetoothServices bluetoothServices = Get.find();

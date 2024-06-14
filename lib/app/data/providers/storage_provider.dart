@@ -1,8 +1,8 @@
 import 'dart:convert';
-
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/services/storage_services.dart';
 import 'package:get/get.dart';
+
+import '../models/users.dart';
+import '../services/storage_services.dart';
 
 class StorageProvider {
   final StorageServices _storage = Get.find<StorageServices>();

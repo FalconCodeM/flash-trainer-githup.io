@@ -1,9 +1,10 @@
-import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/repository/database_repository.dart';
-import 'package:flash_trainer_app_bloc/app/modules/histroy/views/screens/history_user.dart';
-import 'package:flash_trainer_app_bloc/app/routes/app_pages.dart';
 import 'package:get/get.dart';
+
+import '../../../data/errors/errors.dart';
+import '../../../data/models/users.dart';
+import '../../../data/repository/database_repository.dart';
+import '../../../routes/app_pages.dart';
+import '../views/screens/history_user.dart';
 
 class HistoryController extends GetxController {
   DatabaseRepository repository;

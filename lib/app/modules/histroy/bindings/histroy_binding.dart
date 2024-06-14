@@ -1,7 +1,7 @@
-import 'package:flash_trainer_app_bloc/app/data/providers/storage_provider.dart';
-import 'package:flash_trainer_app_bloc/app/data/repository/database_repository.dart';
 import 'package:get/get.dart';
 
+import '../../../data/providers/storage_provider.dart';
+import '../../../data/repository/database_repository.dart';
 import '../controllers/histroy_controller.dart';
 
 class HistroyBinding extends Bindings {

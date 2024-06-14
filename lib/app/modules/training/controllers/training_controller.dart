@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/repository/database_repository.dart';
-import 'package:flash_trainer_app_bloc/app/data/services/bluetooth_services.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/keys.dart';
-import 'package:flash_trainer_app_bloc/app/modules/training/views/screens/finishing_training.dart';
-import 'package:flash_trainer_app_bloc/app/modules/training/views/screens/start_training.dart';
-import 'package:flash_trainer_app_bloc/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../../data/errors/errors.dart';
+import '../../../data/models/users.dart';
+import '../../../data/repository/database_repository.dart';
+import '../../../data/services/bluetooth_services.dart';
+import '../../../data/values/colors.dart';
+import '../../../data/values/keys.dart';
+import '../../../routes/app_pages.dart';
+import '../views/screens/finishing_training.dart';
+import '../views/screens/start_training.dart';
 
 class TrainingController extends GetxController {
   final FlashTrainerBluetoothServices bluetoothServices =

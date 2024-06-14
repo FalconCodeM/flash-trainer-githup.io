@@ -1,5 +1,6 @@
-import 'package:flash_trainer_app_bloc/app/data/models/users.dart';
-import 'package:flash_trainer_app_bloc/app/data/providers/storage_provider.dart';
+
+import '../models/users.dart';
+import '../providers/storage_provider.dart';
 
 class DatabaseRepository {
   final StorageProvider storage;

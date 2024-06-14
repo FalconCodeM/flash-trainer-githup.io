@@ -1,16 +1,17 @@
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/strings.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/items/devices_list_item.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_app_bar.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_background.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_button.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_main_app.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_text.dart';
-import 'package:flash_trainer_app_bloc/app/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../../data/values/colors.dart';
+import '../../../../data/values/strings.dart';
+import '../../../../data/widgets/items/devices_list_item.dart';
+import '../../../../data/widgets/reusable_app_bar.dart';
+import '../../../../data/widgets/reusable_background.dart';
+import '../../../../data/widgets/reusable_button.dart';
+import '../../../../data/widgets/reusable_main_app.dart';
+import '../../../../data/widgets/reusable_text.dart';
+import '../../controllers/home_controller.dart';
 
 class BluetoothScreen extends GetView<HomeController> {
   const BluetoothScreen({super.key});

@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
-import 'package:flash_trainer_app_bloc/app/data/values/keys.dart';
 import 'package:get/get.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
+import '../errors/errors.dart';
+import '../values/keys.dart';
 
 class FlashTrainerBluetoothServices extends GetxService {
   var isScanning = false.obs;

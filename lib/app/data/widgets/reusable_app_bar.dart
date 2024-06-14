@@ -1,8 +1,9 @@
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../values/colors.dart';
+import 'reusable_icon_button.dart';
 
 class ReusableAppBar extends StatelessWidget {
   final String title;

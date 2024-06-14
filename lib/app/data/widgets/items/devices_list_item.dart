@@ -1,7 +1,8 @@
-import 'package:flash_trainer_app_bloc/app/data/values/colors.dart';
-import 'package:flash_trainer_app_bloc/app/data/widgets/reusable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../values/colors.dart';
+import '../reusable_text.dart';
 
 class DevicesListItem extends StatelessWidget {
   final Function()? onTap;
