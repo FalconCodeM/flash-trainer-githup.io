@@ -1,3 +1,4 @@
+import 'package:flash_trainer_app_bloc/app/data/errors/errors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -84,6 +85,8 @@ class HomeView extends GetView<HomeController> {
                 if (controller.bluetoothServices.connectedDevice.value !=
                     null) {
                   Get.offAllNamed(Routes.TRAINING);
+                } else {
+                  AppErrorMsg.toastError(msg: "Please connect to device");
                 }
               },
             ),
