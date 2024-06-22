@@ -34,7 +34,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  RxString getDeviceName(BluetoothDevice device) {
+  RxString getDeviceName(BluetoothDevice? device) {
     if (device != null) {
       if (device.advName.isNotEmpty) {
         deviceName.value = device.advName;
