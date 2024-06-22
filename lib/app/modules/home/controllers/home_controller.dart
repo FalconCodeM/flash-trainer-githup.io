@@ -1,7 +1,6 @@
 import 'package:flash_trainer_app_bloc/app/data/values/strings.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
-
 import '../../../data/errors/errors.dart';
 import '../../../data/models/users.dart';
 import '../../../data/repository/database_repository.dart';

@@ -41,7 +41,7 @@ class HomeView extends GetView<HomeController> {
                   ReusableText(
                     text: controller
                         .getDeviceName(
-                            controller.bluetoothServices.connectedDevice.value!)
+                            controller.bluetoothServices.connectedDevice.value)
                         .value,
                     textColor: AppColors.primaryElementBg,
                     fontSize: 13,
