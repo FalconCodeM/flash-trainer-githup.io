@@ -96,7 +96,7 @@ class FlashTrainerBluetoothServices extends GetxService {
     await device.connect();
     connectedDevices.add(device);
     connectedDevice.value = device;
-    AppErrorMsg.toastSuccess(msg: "Connected to ${device.advName}");
+    AppErrorMsg.toastSuccess(msg: "Connected to ${device.name}");
   }
 
   Future<void> disconnectFromDevice(BluetoothDevice device) async {

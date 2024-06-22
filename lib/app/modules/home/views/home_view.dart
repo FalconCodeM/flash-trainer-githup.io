@@ -39,15 +39,10 @@ class HomeView extends GetView<HomeController> {
                   const ReusableText(text: AppStrings.bluetoothDevice),
                   Obx(
                     () => ReusableText(
-                      text:
-                          (controller.bluetoothServices.connectedDevice.value !=
-                                  null)
-                              ? controller.bluetoothServices.connectedDevice
-                                      .value!.advName.isEmpty
-                                  ? controller.bluetoothServices.connectedDevice
-                                      .value!.advName
-                                  : 'Unknown Device'
-                              : AppStrings.noDevice,
+                      text: controller
+                          .getDeviceName(controller
+                              .bluetoothServices.connectedDevice.value!)
+                          .value,
                       textColor: AppColors.primaryElementBg,
                       fontSize: 13,
                     ),
@@ -83,7 +78,16 @@ class HomeView extends GetView<HomeController> {
             SizedBox(height: 210.h),
             ReusableButton(
               title: AppStrings.startTraining,
-              onTap: () => Get.offAllNamed(Routes.TRAINING),
+              background:
+                  controller.bluetoothServices.connectedDevice.value != null
+                      ? AppColors.primaryElement
+                      : AppColors.primaryElementBg,
+              onTap: () {
+                if (controller.bluetoothServices.connectedDevice.value !=
+                    null) {
+                  Get.offAllNamed(Routes.TRAINING);
+                }
+              },
             ),
           ],
         ),
