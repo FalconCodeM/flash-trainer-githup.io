@@ -122,6 +122,7 @@ class FlashTrainerBluetoothServices extends GetxService {
             characteristic.properties.write) {
           if (_isNumeric(message)) {
             final List<int> dataToSend = utf8.encode(message);
+            AppErrorMsg.toastInfo(msg: dataToSend.toString());
             await characteristic.write(dataToSend);
           } else {
             AppErrorMsg.toastError(msg: "error send message");

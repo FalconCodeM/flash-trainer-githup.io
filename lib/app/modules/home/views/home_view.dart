@@ -37,15 +37,13 @@ class HomeView extends GetView<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const ReusableText(text: AppStrings.bluetoothDevice),
-                  Obx(
-                    () => ReusableText(
-                      text: controller
-                          .getDeviceName(controller
-                              .bluetoothServices.connectedDevice.value!)
-                          .value,
-                      textColor: AppColors.primaryElementBg,
-                      fontSize: 13,
-                    ),
+                  ReusableText(
+                    text: controller
+                        .getDeviceName(
+                            controller.bluetoothServices.connectedDevice.value!)
+                        .value,
+                    textColor: AppColors.primaryElementBg,
+                    fontSize: 13,
                   ),
                 ],
               ),
