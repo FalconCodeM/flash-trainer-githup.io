@@ -106,7 +106,7 @@ class TrainingController extends GetxController {
     bluetoothServices.sendMessage(
         allPodsSelected.toString(), AppKeys.activePods);
     await Future.delayed(const Duration(milliseconds: 500));
-    bluetoothServices.sendMessage(time.value, AppKeys.trainingTime);
+    // bluetoothServices.sendMessage(time.value, AppKeys.trainingTime);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       trainingMsg.value = "Ready";
