@@ -134,6 +134,7 @@ class FlashTrainerBluetoothServices extends GetxService {
   }
 
   bool _isNumeric(String? str) {
+    AppErrorMsg.toastInfo(msg: str!);
     if (str == null) {
       return false;
     }
