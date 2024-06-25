@@ -34,6 +34,9 @@ class FlashTrainerBluetoothServices extends GetxService {
       isScanning.value = true;
       availableDevices.clear();
       FlutterBluePlus.startScan(timeout: const Duration(seconds: 10));
+      FlutterBluePlus.scanResults.listen((results) {
+        availableDevices.assignAll(results);
+      });
     }
   }
 
@@ -46,8 +49,7 @@ class FlashTrainerBluetoothServices extends GetxService {
     if (connectedDevice.value == null) return;
 
     try {
-      List<BluetoothService> services =
-          await getDeviceServices(connectedDevice.value!);
+      List<BluetoothService> services = await getDeviceServices(connectedDevice.value!);
       for (var service in services) {
         for (var characteristic in service.characteristics) {
           if (characteristic.uuid.toString() == AppKeys.podsActiveRole) {
@@ -56,8 +58,7 @@ class FlashTrainerBluetoothServices extends GetxService {
             await _listenToCharacteristic(characteristic, rightTouchNumbers);
           } else if (characteristic.uuid.toString() == AppKeys.wrongTouchRole) {
             await _listenToCharacteristic(characteristic, wrongTouchNumbers);
-          } else if (characteristic.uuid.toString() ==
-              AppKeys.averageTimeRole) {
+          } else if (characteristic.uuid.toString() == AppKeys.averageTimeRole) {
             await _listenToCharacteristic(characteristic, averageTimeNumbers);
           }
         }
@@ -71,15 +72,13 @@ class FlashTrainerBluetoothServices extends GetxService {
       BluetoothCharacteristic characteristic, RxList<int> targetList) async {
     try {
       if (characteristic.properties.read || characteristic.properties.notify) {
-        characteristic.lastValueStream.listen((value) {
+        characteristic.value.listen((value) {
           if (value.isNotEmpty) {
             final message = utf8.decode(value);
-            targetList
-                .assignAll(transformMessage(message).map(int.parse).toList());
+            targetList.assignAll(transformMessage(message).map(int.parse).toList());
           }
         }, onError: (error) {
-          AppErrorMsg.toastError(
-              msg: 'Error listening to characteristic value: $error');
+          AppErrorMsg.toastError(msg: 'Error listening to characteristic value: $error');
         });
 
         if (characteristic.properties.notify) {
@@ -93,52 +92,57 @@ class FlashTrainerBluetoothServices extends GetxService {
   }
 
   Future<void> connectToDevice(BluetoothDevice device) async {
-    await device.connect();
-    connectedDevices.add(device);
-    connectedDevice.value = device;
-    AppErrorMsg.toastSuccess(msg: "Connected to ${device.name}");
+    try {
+      await device.connect();
+      connectedDevices.add(device);
+      connectedDevice.value = device;
+      AppErrorMsg.toastSuccess(msg: "Connected to ${device.name}");
+    } catch (e) {
+      AppErrorMsg.toastError(msg: "Failed to connect to device: $e");
+    }
   }
 
   Future<void> disconnectFromDevice(BluetoothDevice device) async {
-    await device.disconnect();
-    connectedDevices.remove(device);
-    if (connectedDevice.value == device) {
-      connectedDevice.value = null;
+    try {
+      await device.disconnect();
+      connectedDevices.remove(device);
+      if (connectedDevice.value == device) {
+        connectedDevice.value = null;
+      }
+      AppErrorMsg.toastInfo(msg: "Disconnected from ${device.name}");
+    } catch (e) {
+      AppErrorMsg.toastError(msg: "Failed to disconnect from device: $e");
     }
-    AppErrorMsg.toastInfo(msg: "Disconnected from ${device.advName}");
   }
 
-  Future<List<BluetoothService>> getDeviceServices(
-      BluetoothDevice device) async {
-    return await device.discoverServices();
+  Future<List<BluetoothService>> getDeviceServices(BluetoothDevice device) async {
+    try {
+      return await device.discoverServices();
+    } catch (e) {
+      AppErrorMsg.toastError(msg: "Failed to discover services: $e");
+      return [];
+    }
   }
 
   void sendMessage(String message, String characteristicUuid) async {
-    final List<BluetoothService> services =
-        await connectedDevice.value!.discoverServices();
-    for (var service in services) {
-      for (var characteristic in service.characteristics) {
-        if (characteristic.uuid.toString() == characteristicUuid &&
-            characteristic.properties.write) {
-          if (_isNumeric(message)) {
+    if (connectedDevice.value == null) {
+      AppErrorMsg.toastError(msg: "No device connected");
+      return;
+    }
+    try {
+      final List<BluetoothService> services = await connectedDevice.value!.discoverServices();
+      for (var service in services) {
+        for (var characteristic in service.characteristics) {
+          if (characteristic.uuid.toString() == characteristicUuid &&
+              characteristic.properties.write) {
             final List<int> dataToSend = utf8.encode(message);
-            AppErrorMsg.toastInfo(msg: dataToSend.toString());
             await characteristic.write(dataToSend);
-          } else {
-            AppErrorMsg.toastError(msg: "error send message");
-            return;
           }
         }
       }
+    } catch (e) {
+      AppErrorMsg.toastError(msg: "Failed to send message: $e");
     }
-  }
-
-  bool _isNumeric(String? str) {
-    AppErrorMsg.toastInfo(msg: str!);
-    if (str == null) {
-      return false;
-    }
-    return double.tryParse(str) != null;
   }
 
   List<String> transformMessage(String message) {

@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../data/errors/errors.dart';
 import '../../../data/models/users.dart';
 import '../../../data/repository/database_repository.dart';
@@ -16,7 +14,7 @@ import '../views/screens/start_training.dart';
 
 class TrainingController extends GetxController {
   final FlashTrainerBluetoothServices bluetoothServices =
-      Get.find<FlashTrainerBluetoothServices>();
+  Get.find<FlashTrainerBluetoothServices>();
   DatabaseRepository repository;
 
   TrainingController({required this.repository});
@@ -102,11 +100,11 @@ class TrainingController extends GetxController {
 
   void _startTraining() async {
     trainingTime.value = int.parse(time.value);
-
+    var activePodsToMessage = allPodsSelected.map((e) => e.toString()).toList();
     bluetoothServices.sendMessage(
-        allPodsSelected.toString(), AppKeys.activePods);
+        activePodsToMessage.join(','), AppKeys.activePods);
     await Future.delayed(const Duration(milliseconds: 500));
-    // bluetoothServices.sendMessage(time.value, AppKeys.trainingTime);
+    bluetoothServices.sendMessage(time.value, AppKeys.trainingTime);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       trainingMsg.value = "Ready";
@@ -156,7 +154,7 @@ class TrainingController extends GetxController {
         bluetoothServices.podsActiveNumbers.isNotEmpty
             ? bluetoothServices.podsActiveNumbers.length
             : 1,
-        (index) => Pods(
+            (index) => Pods(
           wrongTouch: bluetoothServices.wrongTouchNumbers.isNotEmpty
               ? bluetoothServices.wrongTouchNumbers[index].toString()
               : '0',
@@ -175,7 +173,7 @@ class TrainingController extends GetxController {
     );
 
     var existingUserIndex =
-        users.indexWhere((user) => user.userName == name.value);
+    users.indexWhere((user) => user.userName == name.value);
 
     if (existingUserIndex != -1) {
       users[existingUserIndex].training.add(newTraining);
