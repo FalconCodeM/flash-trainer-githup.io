@@ -49,7 +49,8 @@ class FlashTrainerBluetoothServices extends GetxService {
     if (connectedDevice.value == null) return;
 
     try {
-      List<BluetoothService> services = await getDeviceServices(connectedDevice.value!);
+      List<BluetoothService> services =
+          await getDeviceServices(connectedDevice.value!);
       for (var service in services) {
         for (var characteristic in service.characteristics) {
           if (characteristic.uuid.toString() == AppKeys.podsActiveRole) {
@@ -58,7 +59,8 @@ class FlashTrainerBluetoothServices extends GetxService {
             await _listenToCharacteristic(characteristic, rightTouchNumbers);
           } else if (characteristic.uuid.toString() == AppKeys.wrongTouchRole) {
             await _listenToCharacteristic(characteristic, wrongTouchNumbers);
-          } else if (characteristic.uuid.toString() == AppKeys.averageTimeRole) {
+          } else if (characteristic.uuid.toString() ==
+              AppKeys.averageTimeRole) {
             await _listenToCharacteristic(characteristic, averageTimeNumbers);
           }
         }
@@ -75,10 +77,12 @@ class FlashTrainerBluetoothServices extends GetxService {
         characteristic.value.listen((value) {
           if (value.isNotEmpty) {
             final message = utf8.decode(value);
-            targetList.assignAll(transformMessage(message).map(int.parse).toList());
+            targetList
+                .assignAll(transformMessage(message).map(int.parse).toList());
           }
         }, onError: (error) {
-          AppErrorMsg.toastError(msg: 'Error listening to characteristic value: $error');
+          AppErrorMsg.toastError(
+              msg: 'Error listening to characteristic value: $error');
         });
 
         if (characteristic.properties.notify) {
@@ -115,7 +119,8 @@ class FlashTrainerBluetoothServices extends GetxService {
     }
   }
 
-  Future<List<BluetoothService>> getDeviceServices(BluetoothDevice device) async {
+  Future<List<BluetoothService>> getDeviceServices(
+      BluetoothDevice device) async {
     try {
       return await device.discoverServices();
     } catch (e) {
@@ -130,12 +135,14 @@ class FlashTrainerBluetoothServices extends GetxService {
       return;
     }
     try {
-      final List<BluetoothService> services = await connectedDevice.value!.discoverServices();
+      final List<BluetoothService> services =
+          await connectedDevice.value!.discoverServices();
       for (var service in services) {
         for (var characteristic in service.characteristics) {
           if (characteristic.uuid.toString() == characteristicUuid &&
               characteristic.properties.write) {
             final List<int> dataToSend = utf8.encode(message);
+            AppErrorMsg.toastInfo(msg: dataToSend.toString());
             await characteristic.write(dataToSend);
           }
         }
