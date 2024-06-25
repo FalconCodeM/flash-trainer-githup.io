@@ -53,13 +53,13 @@ class TrainingView extends GetView<TrainingController> {
                     text: AppStrings.activePods,
                     fontSize: 16,
                   ),
-                  // Obx(
-                  //   () => PodButton(
-                  //     onTap: () => controller.selectPod(0),
-                  //     count: 0,
-                  //     background: controller.podIsActive(0),
-                  //   ),
-                  // ),
+                  Obx(
+                    () => PodButton(
+                      onTap: () => controller.selectPod(0),
+                      count: 0,
+                      background: controller.podIsActive(0),
+                    ),
+                  ),
                   Container(
                     height: 300.h,
                     margin: EdgeInsets.symmetric(vertical: 10.h),
