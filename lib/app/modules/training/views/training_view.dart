@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../data/values/colors.dart';
+import '../../../data/values/shadows.dart';
 import '../../../data/values/strings.dart';
 import '../../../data/widgets/items/pod_button.dart';
 import '../../../data/widgets/reusable_app_bar.dart';
@@ -53,15 +55,36 @@ class TrainingView extends GetView<TrainingController> {
                     text: AppStrings.activePods,
                     fontSize: 16,
                   ),
+                  SizedBox(height: 20.h),
                   Obx(
-                    () => PodButton(
+                    () => GestureDetector(
                       onTap: () => controller.selectPod(0),
-                      count: 0,
-                      background: controller.podIsActive(0),
+                      child: Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 5.h,
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: controller.podIsActive(0),
+                          borderRadius: BorderRadius.circular(15.w),
+                          boxShadow: const [AppShadows.greyShadow],
+                        ),
+                        child: const ReusableText(
+                          text: "${AppStrings.pods}  0",
+                          textAlign: TextAlign.center,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          textColor: AppColors.primaryElementText,
+                        ),
+                      ),
                     ),
                   ),
                   Container(
-                    height: 300.h,
+                    height: 280.h,
                     margin: EdgeInsets.symmetric(vertical: 10.h),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
